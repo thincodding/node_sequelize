@@ -16,6 +16,14 @@ db.sequelize = sequelize;
 
 db.category = require('../models/categoryModel')(sequelize, Sequelize)
 db.company = require('../models/companyModel')(sequelize, Sequelize)
-db.product = require('../models/productModel')(sequelize, Sequelize)
+db.products = require('../models/productModels')(sequelize, Sequelize)
+
+//join table
+db.category.hasMany(db.products,{foreignKey: 'categoryID',as: "catID"})
+db.company.hasMany(db.products, {foreignKey: "companyID", as: "comID"})
+
+db.products.belongsTo(db.category,{foreignKey: 'categoryID', as: "catID"})
+db.products.belongsTo(db.company, {foreignKey: "companyID", as: "comID"})
+
 
 module.exports = db;

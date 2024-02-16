@@ -1,14 +1,19 @@
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+const FileUploaded = require('express-fileupload')
 const app = express();
+
 const db = require('./db/database')
 const category = require("./controller/categoryController")
 const company = require("./controller/companyController")
+const product = require('./controller/ProductController')
 
 app.use(express.json())
 app.use(cors())
 app.use(bodyParser.json());
+app.use(express.static('public'))
+app.use(FileUploaded())
 
 db.sequelize.sync();
 
@@ -47,4 +52,20 @@ app.delete("/company/delete/:id",function(req, res){
     company.deleteCompany(req, res)
 })
 
+//product
+app.post("/product/save",function(req, res){
+    product.saveProduct(req, res)
+})
+app.get("/product/get", function(req, res){
+    product.fetchProduct(req, res)
+})
+app.patch('/product/update/:id',function(req, res){
+    product.updateProduct(req, res)
+})
+app.delete('/product/delete/:id', function(req, res){
+    product.deleteProduct(req, res)
+})
+app.get('/product/get_join', function(req, res){
+    product.joinTableProduct(req, res)
+})
 app.listen(3001, ()=> console.log("Server is runing on port 3001"))

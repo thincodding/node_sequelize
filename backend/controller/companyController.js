@@ -73,7 +73,6 @@ const updateCompany = async(req, res) => {
 }
 
 //delete Company
-
 const deleteCompany = async(req, res) => {
 
     try{

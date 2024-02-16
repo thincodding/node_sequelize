@@ -1,6 +1,6 @@
 module.exports = (sequelize, Datatype) => {
 
-    const product = sequelize.define("tbl_product",{
+    const product = sequelize.define("tblproduct",{
 
         proID: {
             type: Datatype.INTEGER,
@@ -18,6 +18,13 @@ module.exports = (sequelize, Datatype) => {
         },
         companyID: {
             type: Datatype.INTEGER
+        },
+        image:{
+            type:Datatype.STRING
+        },
+        url: {
+            type:Datatype.STRING
+            
         }
 
     })
